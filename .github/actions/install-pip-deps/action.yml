@@ -1,0 +1,17 @@
+name: 'Install Dependencies'
+description: Install pip dependencies
+inputs: {}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        repository: mtararujs/python-greetings
+        path: python-greetings
+    - name: Install dependencies
+      working-directory: python-greetings
+      run: |
+        echo "Installing all required dependencies"
+        pip3 install -r requirements.txt

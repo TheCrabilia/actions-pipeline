@@ -7,83 +7,83 @@ on:
 
 jobs:
   install-pip-deps:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Install Dependencies
         uses: ./.github/actions/install-deps
 
-  deploy-to-dev:
-    runs-on: self-hosted
-    needs: install-pip-deps
-    steps:
-      - name: Deploy to Dev
-        uses: ./.github/actions/deploy
-        with:
-          env: dev
-          port: '7001'
+  # deploy-to-dev:
+  #   runs-on: self-hosted
+  #   needs: install-pip-deps
+  #   steps:
+  #     - name: Deploy to Dev
+  #       uses: ./.github/actions/deploy
+  #       with:
+  #         env: dev
+  #         port: '7001'
 
-  tests-on-dev:
-    runs-on: self-hosted
-    needs: deploy-to-dev
-    steps:
-      - name: Run tests on Dev
-        uses: ./.github/actions/test
-        with:
-          env: dev
+  # tests-on-dev:
+  #   runs-on: self-hosted
+  #   needs: deploy-to-dev
+  #   steps:
+  #     - name: Run tests on Dev
+  #       uses: ./.github/actions/test
+  #       with:
+  #         env: dev
 
-  deploy-to-staging:
-    runs-on: self-hosted
-    needs: tests-on-dev
-    steps:
-      - name: Deploy to Staging
-        uses: ./.github/actions/deploy
-        with:
-          env: staging
-          port: '7002'
+  # deploy-to-staging:
+  #   runs-on: self-hosted
+  #   needs: tests-on-dev
+  #   steps:
+  #     - name: Deploy to Staging
+  #       uses: ./.github/actions/deploy
+  #       with:
+  #         env: staging
+  #         port: '7002'
 
-  tests-on-staging:
-    runs-on: self-hosted
-    needs: deploy-to-staging
-    steps:
-      - name: Run tests on Staging
-        uses: ./.github/actions/test
-        with:
-          env: staging
+  # tests-on-staging:
+  #   runs-on: self-hosted
+  #   needs: deploy-to-staging
+  #   steps:
+  #     - name: Run tests on Staging
+  #       uses: ./.github/actions/test
+  #       with:
+  #         env: staging
 
-  deploy-to-preprod:
-    runs-on: self-hosted
-    needs: tests-on-staging
-    steps:
-      - name: Deploy to Preprod
-        uses: ./.github/actions/deploy
-        with:
-          env: preprod
-          port: '7003'
+  # deploy-to-preprod:
+  #   runs-on: self-hosted
+  #   needs: tests-on-staging
+  #   steps:
+  #     - name: Deploy to Preprod
+  #       uses: ./.github/actions/deploy
+  #       with:
+  #         env: preprod
+  #         port: '7003'
 
-  tests-on-preprod:
-    runs-on: self-hosted
-    needs: deploy-to-preprod
-    steps:
-      - name: Run tests on Preprod
-        uses: ./.github/actions/test
-        with:
-          env: preprod
+  # tests-on-preprod:
+  #   runs-on: self-hosted
+  #   needs: deploy-to-preprod
+  #   steps:
+  #     - name: Run tests on Preprod
+  #       uses: ./.github/actions/test
+  #       with:
+  #         env: preprod
 
-  deploy-to-prod:
-    runs-on: self-hosted
-    needs: tests-on-preprod
-    steps:
-      - name: Deploy to Prod
-        uses: ./.github/actions/deploy
-        with:
-          env: prod
-          port: '7004'
+  # deploy-to-prod:
+  #   runs-on: self-hosted
+  #   needs: tests-on-preprod
+  #   steps:
+  #     - name: Deploy to Prod
+  #       uses: ./.github/actions/deploy
+  #       with:
+  #         env: prod
+  #         port: '7004'
 
-  tests-on-prod:
-    runs-on: self-hosted
-    needs: deploy-to-prod
-    steps:
-      - name: Run tests on Prod
-        uses: ./.github/actions/test
-        with:
-          env: prod
+  # tests-on-prod:
+  #   runs-on: self-hosted
+  #   needs: deploy-to-prod
+  #   steps:
+  #     - name: Run tests on Prod
+  #       uses: ./.github/actions/test
+  #       with:
+  #         env: prod
