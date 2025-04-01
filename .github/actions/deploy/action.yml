@@ -7,6 +7,10 @@ inputs:
   port:
     description: Port number to run service on
     required: true
+
+env:
+  RUNNER_TRACKING_ID: ${GITHUB_RUN_ID}
+
 runs:
   using: "composite"
   steps:
@@ -17,7 +21,7 @@ runs:
         path: python-greetings
     - name: Stop existing service
       working-directory: python-greetings
-      run: RUNNER_TRACKING_ID="" && pm2 delete greetings-app-${{ inputs.env }} || true
+      run: pm2 delete greetings-app-${{ inputs.env }} || true
       shell: bash
     - name: Start service
       working-directory: python-greetings
