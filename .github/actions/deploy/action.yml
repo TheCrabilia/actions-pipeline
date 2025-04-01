@@ -1,0 +1,27 @@
+name: Deploy Service
+description: Deploy a service to specific environment
+inputs:
+  env:
+    description: Environment (dev, stg, preprod, prod)
+    required: true
+  port:
+    description: Port number to run service on
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        repository: mtararujs/python-greetings
+        path: python-greetings
+    - name: Stop existing service
+      working-directory: python-greetings
+      run: pm2 delete greetings-app-${{ inputs.env }} || true
+      shell: bash
+    - name: Start service
+      working-directory: python-greetings
+      run: |
+        echo "Deploying to ${{ inputs.env }} environment on port ${{ inputs.port }}..."
+        pm2 start app.py --name greetings-app-${{ inputs.env }} -- --port ${{ inputs.port }}
+      shell: bash

@@ -1,0 +1,22 @@
+name: Run Tests
+description: Run tests in specified environment
+inputs:
+  env:
+    description: Environment (dev, stg, preprod, prod)
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        repository: mtararujs/course-js-api-framework
+        path: course-js-api-framework
+    - name: Install npm dependencies
+      working-directory: course-js-api-framework
+      run: npm install
+    - name: Run tests
+      working-directory: course-js-api-framework
+      run: |
+        echo "Running tests for ${{ inputs.env }} environment..."
+        npm run greetings greetings_${{ inputs.env }}
