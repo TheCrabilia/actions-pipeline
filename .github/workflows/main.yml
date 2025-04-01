@@ -7,7 +7,7 @@ on:
 
 jobs:
   install-pip-deps:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -15,7 +15,7 @@ jobs:
         uses: ./.github/actions/install-pip-deps
 
   deploy-to-dev:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: install-pip-deps
     steps:
       - name: Checkout
@@ -27,7 +27,7 @@ jobs:
           port: '7001'
 
   tests-on-dev:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: deploy-to-dev
     steps:
       - name: Checkout
