@@ -37,6 +37,17 @@ jobs:
         with:
           env: dev
 
+  clean-dev:
+    runs-on: self-hosted
+    needs: tests-on-dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cleanup DEV
+        uses: ./.github/actions/cleanup
+        with:
+          env: dev
+
   # deploy-to-staging:
   #   runs-on: self-hosted
   #   needs: tests-on-dev

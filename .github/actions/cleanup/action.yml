@@ -1,0 +1,19 @@
+name: Cleanup Deployed Service
+description: Cleanup Delployed service in specific environment
+inputs:
+  env:
+    description: Environment (dev, stg, preprod, prod)
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        repository: mtararujs/python-greetings
+        path: python-greetings
+    - name: Stop existing service
+      working-directory: python-greetings
+      run: pm2 delete greetings-app-${{ inputs.env }} || true
+      shell: bash
