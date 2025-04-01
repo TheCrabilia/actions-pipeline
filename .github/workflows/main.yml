@@ -40,6 +40,7 @@ jobs:
   clean-dev:
     runs-on: self-hosted
     needs: tests-on-dev
+    if: always()
     steps:
       - name: Checkout
         uses: actions/checkout@v4
