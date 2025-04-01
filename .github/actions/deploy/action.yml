@@ -23,6 +23,5 @@ runs:
       working-directory: python-greetings
       run: |
         echo "Deploying to ${{ inputs.env }} environment on port ${{ inputs.port }}..."
-        . venv/bin/activate
         pm2 start app.py --name greetings-app-${{ inputs.env }} -- --port ${{ inputs.port }}
       shell: bash
