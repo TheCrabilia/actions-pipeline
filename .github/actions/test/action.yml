@@ -15,8 +15,10 @@ runs:
     - name: Install npm dependencies
       working-directory: course-js-api-framework
       run: npm install
+      shell: bash
     - name: Run tests
       working-directory: course-js-api-framework
       run: |
         echo "Running tests for ${{ inputs.env }} environment..."
         npm run greetings greetings_${{ inputs.env }}
+      shell: bash
